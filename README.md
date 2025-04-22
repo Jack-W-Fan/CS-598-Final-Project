@@ -1,25 +1,14 @@
-# Concept-Based Model Explanations for EHRs — Synthea Reproduction
+# Reproducing Concept-Based Model Explanations for EHRs
 
-This repository reproduces the core components of the paper: 
-**Concept-Based Model Explanations for Electronic Health Records** ([arXiv:2012.02308](https://arxiv.org/abs/2012.02308)).
+This project implements Temporal Concept Activation Vectors (t-CAVs) for Electronic Health Records using the Synthea dataset.
 
-We replace the MIMIC-III dataset with the Synthea synthetic EHR dataset, using the `conditions`, `encounters`, and `patients` tables.
+## Dataset
 
-## Files
-- `data_loader.py`: Loads and processes the relevant Synthea CSVs.
-- `concept_model.py`: Placeholder for the concept-based model.
-- `train.py`: Placeholder for model training logic.
-- `evaluate.py`: Placeholder for evaluation metrics and visualization.
+Install Synthea Dataset Version 2 from here:
+https://synthea.mitre.org/downloads 
 
 ## Setup
+
+1. Install requirements:
 ```bash
 pip install -r requirements.txt
-```
-
-## Running
-```bash
-python data_loader.py
-```
-
-## Author
-Your Name

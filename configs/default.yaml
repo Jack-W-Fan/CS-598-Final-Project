@@ -1,0 +1,18 @@
+data:
+  patients_path: "data/patients.csv"
+  conditions_path: "data/conditions.csv"
+  encounters_path: "data/encounters.csv"
+  max_sequence_length: 50
+
+model:
+  input_dim: 4  # Should match number of concepts
+  hidden_dim: 64
+  concept_dim: 4
+  output_dim: 1
+
+training:
+  batch_size: 32
+  learning_rate: 0.001
+  epochs: 15
+  test_size: 0.2
+  val_size: 0.25

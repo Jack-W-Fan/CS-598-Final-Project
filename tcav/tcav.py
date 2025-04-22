@@ -1,31 +1,35 @@
 import numpy as np
 import torch
 
-def compute_tcav_score(model, cav, layer_output_fn, inputs, target_class):
-    """
-    For each input, calculate directional derivative in direction of CAV,
-    then measure how often it's positive when target_class is true.
-    """
-    model.eval()
-    gradients = []
-    targets = []
-
-    for x, y in inputs:
-        x = x.unsqueeze(0)
-        x.requires_grad = True
-        logits = model(x)
-        pred = logits[0, target_class]
-
-        model.zero_grad()
-        pred.backward(retain_graph=True)
-
-        with torch.no_grad():
-            grads = x.grad.flatten().numpy()
-            directional_derivative = np.dot(grads, cav)
-            gradients.append(directional_derivative)
-            targets.append(y.item())
-
-    gradients = np.array(gradients)
-    targets = np.array(targets)
-
-    return np.mean((gradients > 0)[targets == target_class])
+class TCAV:
+    def __init__(self, model, concept_names):
+        self.model = model
+        self.concept_names = concept_names
+        
+    def compute_tcav(self, dataloader, concept_idx):
+        self.model.eval()
+        gradients = []
+        
+        for batch in dataloader:
+            x, _ = batch
+            x.requires_grad_(True)
+            
+            _, concept_activations = self.model(x, return_concepts=True)
+            concept_act = concept_activations[:, :, concept_idx]
+            
+            grad = torch.autograd.grad(
+                outputs=concept_act,
+                inputs=x,
+                grad_outputs=torch.ones_like(concept_act),
+                create_graph=False
+            )[0]
+            
+            gradients.append(grad.detach().numpy())
+            
+        return np.concatenate(gradients, axis=0).mean(axis=0)
+    
+    def interpret_concepts(self, dataloader):
+        tcav_scores = {}
+        for i, concept_name in enumerate(self.concept_names):
+            tcav_scores[concept_name] = self.compute_tcav(dataloader, i)
+        return tcav_scores
