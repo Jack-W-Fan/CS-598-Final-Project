@@ -1,11 +1,27 @@
-training_curves.png
-models/standard_model.pt
-models/temporal_cpu.pt
-models/temporal_predictor.pt
-models/trained_model.pt
-training_curves.png
-models/trained_model.pt
-data/conditions.csv
-data/encounters.csv
-data/patients.csv
-data/patients_clean.csv
+# Data files
+/data/
+/processed_data/
+/models/
+/results/
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+.python-version
+
+# Environment files
+.env
+venv/
+*.venv
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Large files
+*.npy
+*.pt
+*.pth
+*.h5
