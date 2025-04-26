@@ -15,27 +15,50 @@ https://synthea.mitre.org/downloads
 
 ## Running Pipline
 
-Standard Evaluation
+1. Preprocess Data
 
-    python scripts/evaluate.py \
-    --model models/classifier.pt \
-    --output_dir results/classification
+Default 48-hour prediction horizon
 
-Temporal Prediction (t-CAV)
+    python scripts/preprocess_data.py --horizon 48
 
-    # Default 48-hour horizon
-    python scripts/train_model.py --temporal
+Custom horizon (e.g., 24 hours)
 
-    # Custom horizon (e.g., 24 hours)
-    python scripts/train_model.py --temporal --horizon 24
+    python scripts/preprocess_data.py --horizon 24
+
+2. Train Model
+
+Standard Mode
+
+    python scripts/train_model.py
+
+Temporal Mode
+
+    python scripts/train_model.py --temporal --horizon 48
+
+3. Evaluate
+Standard Concept Analysis
+
+    python scripts/evaluate.py --model_path models/standard_model.pt
+    
+Temporal Predictions
+
+    python scripts/evaluate.py --temporal --model_path models/temporal_model.pt
 
 ## Expected Results
 
 Results will show up in the results folder. See classification for standard evaluation results (should see concept_importance.png and concept_scores.txt). See temporal for the temporal prediction (t-CAV) results (should see risk_preidictions.csv, temporal_metrics.txt, and temporal_predictions.npy).
 
 Example outputs:
-Concept importance scores: Diabetes (0.142), Hypertension (0.098)
-Prediction AUC: 0.68 (chronic disease) vs. 0.72 (48-hr horizon)
+Standard
+
+    Concept importance scores: Diabetes (0.142), Hypertension (0.098)
+    Prediction AUC: 0.68 (chronic disease) vs. 0.72 (48-hr horizon)
+
+Temporal
+
+    AUROC: 0.782
+    Average Risk Score: 0.154
+    Event Rate: 23.5%
 
 ## References
 
