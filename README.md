@@ -5,6 +5,7 @@ This project implements Temporal Concept Activation Vectors (t-CAVs) for interpr
 ## Setup
 
 Installation
+
     git clone https://github.com/Jack-W-Fan/CS-598-Final-Project.git
     cd CS-598-Final-Project
     pip install -r requirements.txt
@@ -15,6 +16,7 @@ https://synthea.mitre.org/downloads
 ## Running Pipline
 
 Standard Evaluation
+
     python scripts/evaluate.py \
     --model models/classifier.pt \
     --output_dir results/classification
