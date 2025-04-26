@@ -31,6 +31,8 @@ Temporal Prediction (t-CAV)
 
 ## Expected Results
 
+Results will show up in the results folder. See classification for standard evaluation results (should see concept_importance.png and concept_scores.txt). See temporal for the temporal prediction (t-CAV) results (should see risk_preidictions.csv, temporal_metrics.txt, and temporal_predictions.npy).
+
 Example outputs:
 Concept importance scores: Diabetes (0.142), Hypertension (0.098)
 Prediction AUC: 0.68 (chronic disease) vs. 0.72 (48-hr horizon)
