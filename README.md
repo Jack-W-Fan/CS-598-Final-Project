@@ -63,4 +63,5 @@ Temporal
 ## References
 
 Mincu et al. (2021). "Concept-Based Model Explanations for Electronic Health Records." ACM CHIL.
+
 Synthea Dataset. MITRE Corporation.
